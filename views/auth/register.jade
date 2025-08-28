@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  .row.justify-content-center
+    .col-md-6.col-lg-4
+      .card.shadow
+        .card-header.bg-success.text-white.text-center
+          h4.mb-0
+            i.bi.bi-person-plus.me-2
+            | 註冊
+        .card-body.p-4
+          if error
+            .alert.alert-danger.alert-dismissible.fade.show
+              | #{error}
+              button.btn-close(type='button', data-bs-dismiss='alert')
+          
+          form(action='/auth/register', method='POST')
+            .mb-3
+              label.form-label(for='username') 使用者名稱
+              input#username.form-control(type='text', name='username', required, placeholder='請輸入使用者名稱')
+            
+            .mb-3
+              label.form-label(for='email') 電子郵件
+              input#email.form-control(type='email', name='email', required, placeholder='請輸入您的電子郵件')
+            
+            .mb-3
+              label.form-label(for='password') 密碼
+              input#password.form-control(type='password', name='password', required, placeholder='請輸入密碼（至少6個字元）')
+            
+            .mb-3
+              label.form-label(for='confirmPassword') 確認密碼
+              input#confirmPassword.form-control(type='password', name='confirmPassword', required, placeholder='請再次輸入密碼')
+            
+            .d-grid
+              button.btn.btn-success.btn-lg(type='submit')
+                i.bi.bi-person-plus.me-2
+                | 註冊
+        
+        .card-footer.text-center
+          p.mb-0 已經有帳號？ 
+            a(href='/auth/login') 立即登入

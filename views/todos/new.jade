@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .row.justify-content-center
+    .col-md-8.col-lg-6
+      .card.shadow
+        .card-header.bg-success.text-white
+          h4.mb-0
+            i.bi.bi-plus-circle.me-2
+            | 新增待辦事項
+        .card-body.p-4
+          if error
+            .alert.alert-danger.alert-dismissible.fade.show
+              | #{error}
+              button.btn-close(type='button', data-bs-dismiss='alert')
+          
+          form(action='/todos', method='POST')
+            .mb-3
+              label.form-label(for='title') 標題
+              input#title.form-control(type='text', name='title', required, placeholder='請輸入待辦事項標題')
+            
+            .mb-3
+              label.form-label(for='description') 描述（選填）
+              textarea#description.form-control(name='description', rows='4', placeholder='請輸入待辦事項的詳細描述...')
+            
+            .d-flex.gap-2
+              button.btn.btn-success(type='submit')
+                i.bi.bi-check-circle.me-2
+                | 新增
+              a.btn.btn-outline-secondary(href='/todos')
+                i.bi.bi-arrow-left.me-2
+                | 返回

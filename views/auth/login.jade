@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  .row.justify-content-center
+    .col-md-6.col-lg-4
+      .card.shadow
+        .card-header.bg-primary.text-white.text-center
+          h4.mb-0
+            i.bi.bi-box-arrow-in-right.me-2
+            | 登入
+        .card-body.p-4
+          if error
+            .alert.alert-danger.alert-dismissible.fade.show
+              | #{error}
+              button.btn-close(type='button', data-bs-dismiss='alert')
+          
+          form(action='/auth/login', method='POST')
+            .mb-3
+              label.form-label(for='email') 電子郵件
+              input#email.form-control(type='email', name='email', required, placeholder='請輸入您的電子郵件')
+            
+            .mb-3
+              label.form-label(for='password') 密碼
+              input#password.form-control(type='password', name='password', required, placeholder='請輸入您的密碼')
+            
+            .d-grid
+              button.btn.btn-primary.btn-lg(type='submit')
+                i.bi.bi-box-arrow-in-right.me-2
+                | 登入
+        
+        .card-footer.text-center
+          p.mb-0 還沒有帳號？ 
+            a(href='/auth/register') 立即註冊

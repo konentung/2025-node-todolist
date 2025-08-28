@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .row.justify-content-center
+    .col-md-8.text-center
+      h1.display-4.mb-4 
+        i.bi.bi-check2-square.text-primary.me-3
+        | 歡迎使用 TodoList
+      p.lead.mb-5 一個簡單而強大的待辦事項管理工具，幫助您更好地組織生活和工作。
+      
+      if isAuthenticated
+        .d-grid.gap-2.d-md-block
+          a.btn.btn-primary.btn-lg.me-md-2(href='/todos')
+            i.bi.bi-list-task.me-2
+            | 查看我的待辦事項
+          a.btn.btn-success.btn-lg(href='/todos/new')
+            i.bi.bi-plus-circle.me-2
+            | 新增待辦事項
+      else
+        .row.justify-content-center
+          .col-md-6
+            .card.shadow
+              .card-body.p-4
+                h5.card-title.mb-4 開始使用 TodoList
+                p.card-text.mb-4 請登入或註冊以開始管理您的待辦事項
+                .d-grid.gap-2
+                  a.btn.btn-primary.me-2(href='/auth/login')
+                    i.bi.bi-box-arrow-in-right.me-2
+                    | 登入
+                  a.btn.btn-outline-primary.me-2(href='/auth/register')
+                    i.bi.bi-person-plus.me-2
+                    | 註冊

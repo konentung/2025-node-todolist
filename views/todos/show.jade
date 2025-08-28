@@ -1,0 +1,71 @@
+extends ../layout
+
+block content
+  .row.justify-content-center
+    .col-md-8.col-lg-6
+      .card.shadow
+        .card-header.d-flex.justify-content-between.align-items-center(class=todo.completed ? 'bg-success text-white' : 'bg-primary text-white')
+          h4.mb-0
+            i.bi.bi-info-circle.me-2
+            | 待辦事項詳情
+          .dropdown
+            button.btn.btn-sm.btn-outline-light.dropdown-toggle(type='button', data-bs-toggle='dropdown')
+              i.bi.bi-three-dots
+            ul.dropdown-menu
+              li
+                a.dropdown-item.toggle-complete(href='#', data-id=todo._id)
+                  if todo.completed
+                    i.bi.bi-x-circle.me-2
+                    | 標記為未完成
+                  else
+                    i.bi.bi-check-circle.me-2
+                    | 標記為完成
+              li
+                a.dropdown-item(href='/todos/' + todo._id + '/edit')
+                  i.bi.bi-pencil.me-2
+                  | 編輯
+              li
+                hr.dropdown-divider
+              li
+                a.dropdown-item.text-danger.delete-todo(href='#', data-id=todo._id)
+                  i.bi.bi-trash.me-2
+                  | 刪除
+        
+        .card-body.p-4
+          .mb-3
+            label.form-label.fw-bold 標題
+            h5.mb-0(class=todo.completed ? 'text-decoration-line-through text-muted' : '') #{todo.title}
+          
+          if todo.description
+            .mb-3
+              label.form-label.fw-bold 描述
+              p.mb-0.text-muted #{todo.description}
+          
+          .mb-3
+            label.form-label.fw-bold 狀態
+            if todo.completed
+              span.badge.bg-success.fs-6
+                i.bi.bi-check-circle.me-1
+                | 已完成
+            else
+              span.badge.bg-warning.fs-6
+                i.bi.bi-clock.me-1
+                | 進行中
+          
+          .mb-3
+            label.form-label.fw-bold 建立時間
+            p.mb-0.text-muted #{new Date(todo.createdAt).toLocaleString('zh-TW')}
+          
+          if todo.updatedAt && todo.updatedAt.getTime() !== todo.createdAt.getTime()
+            .mb-3
+              label.form-label.fw-bold 最後更新
+              p.mb-0.text-muted #{new Date(todo.updatedAt).toLocaleString('zh-TW')}
+        
+        .card-footer
+          .d-flex.gap-2
+            a.btn.btn-outline-secondary(href='/todos')
+              i.bi.bi-arrow-left.me-2
+              | 返回列表
+            a.btn.btn-warning(href='/todos/' + todo._id + '/edit')
+              i.bi.bi-pencil.me-2
+              | 編輯
